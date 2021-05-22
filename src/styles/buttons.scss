@@ -1,0 +1,53 @@
+@import './variables.scss';
+
+@mixin theme-colors($dark-theme: true) {
+	@if $dark-theme {
+        color: $color;
+		background-color: $dark-background;
+		border-color: $dark-border;
+	}
+}
+  
+.btn {
+    @media (max-width: 576px) {
+        font-size: 13px;
+    }
+    @media (min-width: 576px){
+        font-size: 14px;
+    }
+    @media (min-width: 768px){
+        font-size: 15px;
+    }
+    @media (min-width: 992px){
+        font-size: 16px;
+    }
+	@include theme-colors($dark-theme: false);
+	body.dark-mode & {
+		@include theme-colors($dark-theme: true);
+        &.btn-light{
+            &.active{
+                color: $active-text-button;
+                background-color: $active-background-button;
+                border-color: $dark-border;
+            }
+            &:hover {
+                color: $active-text-button;
+                background-color: $active-background-button;
+                border-color: $dark-border;
+            }
+        }
+        &.btn-outline-dark{
+            &.active{
+                color: $active-text-button;
+                background-color: $active-background-button;
+                border-color: $dark-border;
+            }
+            &:hover {
+                color: $active-text-button;
+                background-color: $active-background-button;
+                border-color: $dark-border;
+            }
+        }
+	}
+}
+

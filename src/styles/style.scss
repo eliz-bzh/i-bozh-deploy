@@ -1,0 +1,189 @@
+@import './variables.scss';
+
+@media screen {
+	body {
+		background-color: $default-background;
+		color: $default-color;
+		@media (max-width: 576px) {
+			h3{
+				font-size: 13px;
+			}
+			h1{
+				font-size: 30px;
+			}
+			.input-group-text{
+				font-size: 13px;
+			}
+			.form-control{
+				font-size: 13px;
+			}
+			.MuiSvgIcon-root{
+				font-size: 0.875rem;
+			}
+			.price{
+				color: $color-price;
+				&.product{
+					font-size: 19px;
+				}
+			}
+			.MuiBadge-badge{
+				font-size: 0.6rem;
+				min-width: 10px;
+				height: 10px;
+				padding: 4px;
+			}
+			font-size: 13px;
+		}
+		@media (min-width: 576px){
+            h3{
+				font-size: 14px;
+			}
+			h1{
+				font-size: 33px;
+			}
+			.input-group-text{
+				font-size: 14px;
+			}
+			.form-control{
+				font-size: 14px;
+			}
+			.MuiSvgIcon-root{
+				font-size: 1rem;
+			}
+			.price{
+				color: $color-price;
+				&.product{
+					font-size: 22px;
+				}
+			}
+			.MuiBadge-badge{
+				font-size: 0.67rem;
+				min-width: 15px;
+				height: 15px;
+				padding: 6px;
+			}
+			font-size: 14px;
+        }
+        @media (min-width: 768px){
+            h3{
+				font-size: 16px;
+			}
+			h1{
+				font-size: 36px;
+			}
+			.input-group-text{
+				font-size: 15px;
+			}
+			.form-control{
+				font-size: 15px;
+			}
+			.MuiSvgIcon-root{
+				font-size: 1.25rem;
+			}
+			.price{
+				color: $color-price;
+				&.product{
+					font-size: 24px;
+				}
+			}
+			.MuiBadge-badge{
+				font-size: 0.67rem;
+				min-width: 15px;
+				height: 15px;
+				padding: 6px;
+			}
+			font-size: 15px;
+        }
+        @media (min-width: 992px){
+            h3{
+				font-size: 18.72px;
+			}
+			h1{
+				font-size: 40px;
+			}
+			.input-group-text{
+				font-size: 16px;
+			}
+			.form-control{
+				font-size: 16px;
+			}
+			.MuiSvgIcon-root{
+				font-size: 1.5rem;
+			}
+			.price{
+				color: $color-price;
+				&.product{
+					font-size: 26px;
+				}
+			}
+			.MuiBadge-badge{
+				font-size: 0.75rem;
+				min-width: 20px;
+				height: 20px;
+				padding: 6px;
+			}
+			font-size: 16px;
+        }
+		nav{
+			background-color: $default-nav-color;
+			.nav-items{
+				color: $nav-item;
+				&:hover{
+					color: $nav-item-hover;
+				}
+				&.active{
+					color: $nav-item-hover;
+				}
+			}
+		}
+		
+		.scrollTop {
+			position: fixed;
+			bottom: 50px;
+			align-items: flex-end;
+			height: 20px;
+			justify-content: end;
+			z-index: 1000;
+			cursor: pointer;
+			animation: fadeIn 0.3s;
+			transition: opacity 0.4s;
+			opacity: 0.5;
+			right: 150px;
+			&:hover {
+				opacity: 1;
+			}
+		}
+		.logo{
+			display: block;
+			mix-blend-mode: multiply;
+			background-image: url('../logo_transparent.png');
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: contain;
+			@media (max-width: 576px){
+				height: 80px;
+			}
+			@media (min-width: 576px){
+				height: 90px;
+			}
+			@media (min-width: 768px){
+				height: 110px;
+			}
+			@media (min-width: 992px){
+				height: 130px;
+			}
+		}
+		@media screen {
+			.order-settings{
+				@media (max-width: 768px){
+					display: grid;
+					margin-left: auto;
+					.col{
+						margin-bottom: 3px;
+						padding: 0px;
+					}
+				}
+			}
+		}
+	}	
+}
