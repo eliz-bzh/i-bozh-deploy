@@ -34,28 +34,28 @@ class Product extends Component {
     }
 
     brandsList() {
-        axios.get(`https://i-bozh-server.herokuapp.com/api/Brand/getAll`)
+        axios.get(`https://localhost:5001/api/Brand/getAll`)
             .then(res => {
                 this.setState({ brands: res.data })
             });
     }
 
     typesList() {
-        axios.get(`https://i-bozh-server.herokuapp.com/api/Type/getAll`)
+        axios.get(`https://localhost:5001/api/Type/getAll`)
             .then(res => {
                 this.setState({ types: res.data })
             });
     }
 
     suppliesList() {
-        axios.get(`https://i-bozh-server.herokuapp.com/api/Supply/getAll`)
+        axios.get(`https://localhost:5001/api/Supply/getAll`)
             .then(res => {
                 this.setState({ supplies: res.data })
             });
     }
 
     suppliersList() {
-        axios.get(`https://i-bozh-server.herokuapp.com/api/Supplier/getAll`)
+        axios.get(`https://localhost:5001/api/Supplier/getAll`)
             .then(res => {
                 this.setState({ suppliers: res.data })
             });
@@ -63,7 +63,7 @@ class Product extends Component {
 
     deleteProduct(id) {
         if (window.confirm('Вы уверены?')) {
-            axios.delete(`https://i-bozh-server.herokuapp.com/api/Product/delete/${id}`)
+            axios.delete(`https://localhost:5001/api/Product/delete/${id}`)
                 .then(res => {
                     console.log(res.data);
                 })

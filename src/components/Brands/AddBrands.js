@@ -1,89 +1,87 @@
-import React, { Component } from 'react';
-import { Modal, Row, Col, Form } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Modal, Row, Col, Form, Button } from 'react-bootstrap';
 import SnackBar from '@material-ui/core/Snackbar';
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from '@material-ui/icons/Close';
 import axios from 'axios';
 import qs from 'querystring';
+import { useDispatch } from 'react-redux';
+import { fetchBrands } from '../../redux/actions/ActionFetchData';
 
-export default class AddBrandModal extends Component {
+const AddBrandModal = ({ show, onHide }) => {
 
-    constructor(props) {
-        super(props);
-        this.state = { snackBaropen: false, snackBarMessage: '' };
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+    const dispatch = useDispatch();
+    const [snackBaropen, setSnackBaropen] = useState(false);
+    const [snackBarMessage, setSnackBarMessage] = useState('');
 
-    snackBarClose = (event) => {
-        this.setState({ snackBaropen: false });
-    }
-
-    handleSubmit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
 
-        axios.post(`https://i-bozh-server.herokuapp.com/api/Brand/create?${qs.stringify({
+        axios.post(`https://localhost:5001/api/Brand/create?${qs.stringify({
             Name: event.target.name.value
         })}`)
-            .then(res => this.setState({ snackBaropen: true, snackBarMessage: 'Успешно добавлено' }))
-            .catch(error => this.setState({ snackBaropen: true, snackBarMessage: 'Ошибка добавления' }));
+            .then(res => { setSnackBaropen(true); setSnackBarMessage('Успешно добавлено'); dispatch(fetchBrands()); })
+            .catch(error => { setSnackBaropen(true); setSnackBarMessage('Ошибка добавления') });
     }
 
-    render() {
-        return (
-            <div className='container'>
-                <SnackBar
-                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-                    open={this.state.snackBaropen}
-                    autoHideDuration={1000}
-                    onClose={this.snackBarClose}
-                    message={<span id='message-id'>{this.state.snackBarMessage}</span>}
-                    action={[
-                        <IconButton color="inherit" size="small"
-                            onClick={this.snackBarClose}
-                        ><CloseIcon /></IconButton>
-                    ]} />
-                <Modal
-                    {...this.props}
-                    aria-labelledby="contained-modal-title-vcenter"
-                    centered
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title id="contained-modal-title-vcenter">
-                            Добавление нового бренда
+    const snackBarClose = () => setSnackBaropen(false);
+
+    return (
+        <div className='container'>
+            <SnackBar
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                open={snackBaropen}
+                autoHideDuration={1000}
+                onClose={snackBarClose}
+                message={<span id='message-id'>{snackBarMessage}</span>}
+                action={[
+                    <IconButton color="inherit" size="small"
+                        onClick={snackBarClose}
+                    ><CloseIcon /></IconButton>
+                ]} />
+            <Modal
+                show={show}
+                onHide={onHide}
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        Добавление нового бренда
         </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Row>
-                            <Col>
-                                <Form onSubmit={this.handleSubmit}>
-                                    <Form.Group controlId="name">
-                                        <Form.Label>Название</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            name="name"
-                                            required
-                                            placeholder="Название" />
-                                    </Form.Group>
-                                    <Form.Group>
-                                        <Button variant="light" type="submit">
-                                            Добавить бренд
+                </Modal.Header>
+                <Modal.Body>
+                    <Row>
+                        <Col>
+                            <Form onSubmit={handleSubmit}>
+                                <Form.Group controlId="name">
+                                    <Form.Label>Название</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        name="name"
+                                        required
+                                        placeholder="Название" />
+                                </Form.Group>
+                                <Form.Group>
+                                    <Button variant="light" type="submit">
+                                        Добавить бренд
                             </Button>
-                                    </Form.Group>
-                                </Form>
-                            </Col>
-                        </Row>
+                                </Form.Group>
+                            </Form>
+                        </Col>
+                    </Row>
 
-                    </Modal.Body>
-                    <Modal.Footer>
+                </Modal.Body>
+                <Modal.Footer>
 
-                        <Button variant="light" onClick={this.props.onHide}>
-                            Закрыть
+                    <Button variant="light" onClick={onHide}>
+                        Закрыть
         </Button>
 
-                    </Modal.Footer>
-                </Modal>
-            </div>
-        );
-    };
+                </Modal.Footer>
+            </Modal>
+        </div>
+    )
 }
+
+export default AddBrandModal;

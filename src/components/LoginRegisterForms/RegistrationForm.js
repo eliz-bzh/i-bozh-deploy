@@ -19,7 +19,7 @@ export default class RegistrationForm extends Component {
         event.preventDefault();
         if (event.target.password.value === event.target.password2.value) {
 
-            axios.post(`https://i-bozh-server.herokuapp.com/api/Client/create`, {
+            axios.post(`https://localhost:5001/api/Client/create`, {
 
                 name: event.target.name.value,
                 surname: event.target.surname.value,
