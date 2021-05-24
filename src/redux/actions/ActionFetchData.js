@@ -2,7 +2,7 @@ import * as CONSTANTS from './ActionTypes';
 import axios from 'axios';
 
 export const fetchBrands = () => (dispatch) => {
-    axios.get(`https://localhost:5001/api/Brand/getAll`)
+    axios.get(`https://i-bozh-server.herokuapp.com/api/Brand/getAll`)
         .then(({ data }) => {
             console.log('fetch')
             dispatch(setBrands(data));
@@ -15,7 +15,7 @@ export const setBrands = brands => ({
 });
 
 export const fetchTypes = () => (dispatch) => {
-    axios.get(`https://localhost:5001/api/Type/getAll`)
+    axios.get(`https://i-bozh-server.herokuapp.com/api/Type/getAll`)
         .then(({ data }) => {
             console.log('fetch')
             dispatch(setTypes(data));
@@ -28,7 +28,7 @@ export const setTypes = types => ({
 });
 
 export const fetchSuppliers = () => (dispatch) => {
-    axios.get(`https://localhost:5001/api/Supplier/getAll`)
+    axios.get(`https://i-bozh-server.herokuapp.com/api/Supplier/getAll`)
         .then(({ data }) => {
             console.log('fetch')
             dispatch(setSuppliers(data));
@@ -41,7 +41,7 @@ export const setSuppliers = suppliers => ({
 });
 
 export const fetchSupplies = () => (dispatch) => {
-    axios.get(`https://localhost:5001/api/Supply/getAll`)
+    axios.get(`https://i-bozh-server.herokuapp.com/api/Supply/getAll`)
         .then(({ data }) => {
             console.log('fetch')
             dispatch(setSupplies(data));
@@ -54,7 +54,7 @@ export const setSupplies = supplies => ({
 });
 
 export const fetchOrders = () => (dispatch) => {
-    axios.get(`https://localhost:5001/api/Order/getAll`)
+    axios.get(`https://i-bozh-server.herokuapp.com/api/Order/getAll`)
         .then(({ data }) => {
             console.log('fetch')
             dispatch(setOrders(data));
@@ -67,7 +67,7 @@ export const setOrders = orders => ({
 });
 
 export const fetchClients = () => (dispatch) => {
-    axios.get(`https://localhost:5001/api/Client/getAll`)
+    axios.get(`https://i-bozh-server.herokuapp.com/api/Client/getAll`)
         .then(({ data }) => {
             console.log('fetch client')
             dispatch(setClients(data));
@@ -80,7 +80,7 @@ export const setClients = clients => ({
 });
 
 export const fetchProducts = () => (dispatch) => {
-    axios.get(`https://localhost:5001/api/Product/getAll`)
+    axios.get(`https://i-bozh-server.herokuapp.com/api/Product/getAll`)
         .then(({ data }) => {
             console.log('fetch')
             dispatch(setProducts(data));
@@ -93,7 +93,7 @@ export const setProducts = products => ({
 });
 
 export const fetchBaners = () => (dispatch) => {
-    axios.get(`https://localhost:5001/api/Product/baners`)
+    axios.get(`https://i-bozh-server.herokuapp.com/api/Product/baners`)
         .then(({ data }) => {
             console.log('fetch')
             dispatch(setBaners(data));

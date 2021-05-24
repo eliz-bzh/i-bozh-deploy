@@ -24,7 +24,7 @@ const Brands = () => {
 
     const deleteBrand = (id) => {
         if (window.confirm('Вы уверены?')) {
-            axios.delete(`https://localhost:5001/api/Brand/delete/${id}`)
+            axios.delete(`https://i-bozh-server.herokuapp.com/api/Brand/delete/${id}`)
                 .then(res => dispatch(fetchBrands()))
                 .catch(error => console.log(error));
         }

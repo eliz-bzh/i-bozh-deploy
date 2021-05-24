@@ -24,7 +24,7 @@ const Types = () => {
 
     const deleteType = (id) => {
         if (window.confirm('Вы уверены?')) {
-            axios.delete(`https://localhost:5001/api/Type/delete/${id}`)
+            axios.delete(`https://i-bozh-server.herokuapp.com/api/Type/delete/${id}`)
                 .then(res => dispatch(fetchTypes()))
                 .catch(error => console.log(error));
         }

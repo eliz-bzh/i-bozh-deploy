@@ -17,7 +17,7 @@ const EditBrandModal = ({ show, onHide, brandid, brandname }) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        axios.put(`https://localhost:5001/api/Brand/edit?${qs.stringify({
+        axios.put(`https://i-bozh-server.herokuapp.com/api/Brand/edit?${qs.stringify({
             Id: brandid,
             Name: event.target.name.value
         })}`)

@@ -17,7 +17,7 @@ const AddTypeModal = ({ show, onHide }) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        axios.post(`https://localhost:5001/api/Type/create?${qs.stringify({
+        axios.post(`https://i-bozh-server.herokuapp.com/api/Type/create?${qs.stringify({
             Name: event.target.name.value
         })}`)
             .then(res => { setSnackBaropen(true); setSnackBarMessage('Успешно добавлено'); dispatch(fetchTypes()); })

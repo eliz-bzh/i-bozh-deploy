@@ -19,7 +19,7 @@ const AddSupplyModal = ({ show, onHide, suppliers }) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        axios.post(`https://localhost:5001/api/Supply/create?${qs.stringify({
+        axios.post(`https://i-bozh-server.herokuapp.com/api/Supply/create?${qs.stringify({
             SupplierId: event.target.supplier.value,
             Date: event.target.date.value
         })}`)
@@ -108,7 +108,7 @@ export default AddSupplyModal;
     }
 
     componentDidMount() {
-        axios.get(`https://localhost:5001/api/Supplier/getAll`)
+        axios.get(`https://i-bozh-server.herokuapp.com/api/Supplier/getAll`)
             .then(res => {
                 this.setState({ suppliers: res.data })
             });

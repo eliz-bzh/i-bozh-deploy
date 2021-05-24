@@ -25,7 +25,7 @@ const Order = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.get(`https://localhost:5001/api/Order/excelOrders?${qs.stringify({
+        axios.get(`https://i-bozh-server.herokuapp.com/api/Order/excelOrders?${qs.stringify({
             From: event.target.from.value,
             To: event.target.to.value
         })}`)
@@ -144,12 +144,12 @@ export default Order;
     }
 
     ordersList() {
-        axios.get(`https://localhost:5001/api/Order/getAll`)
+        axios.get(`https://i-bozh-server.herokuapp.com/api/Order/getAll`)
             .then(res => this.setState({ orders: res.data }));
     }
 
     clientList() {
-        axios.get(`https://localhost:5001/api/Client/getAll`)
+        axios.get(`https://i-bozh-server.herokuapp.com/api/Client/getAll`)
             .then(res => this.setState({ clients: res.data }));
     }
 

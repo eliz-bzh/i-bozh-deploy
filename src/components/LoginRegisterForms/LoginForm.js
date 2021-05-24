@@ -24,7 +24,7 @@ class LoginForm extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.setState({ loading: true });
-        axios.get(`https://localhost:5001/api/Client/getByLogin/${event.target.login.value}`)
+        axios.get(`https://i-bozh-server.herokuapp.com/api/Client/getByLogin/${event.target.login.value}`)
             .then(res => {
                 if (res.data !== '') {
                     const password = this.hashingPassword(event.target.password.value);

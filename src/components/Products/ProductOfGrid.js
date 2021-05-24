@@ -36,7 +36,7 @@ const ProductOfGrid = ({ product, role }) => {
 
     const deleteProduct = (id) => {
         if (window.confirm('Вы уверены?')) {
-            axios.delete(`https://localhost:5001/api/Product/delete/${id}`)
+            axios.delete(`https://i-bozh-server.herokuapp.com/api/Product/delete/${id}`)
                 .then(res => dispatch(fetchProducts()))
                 .catch(error => console.log(error));
         }

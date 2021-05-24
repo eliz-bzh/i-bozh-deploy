@@ -20,7 +20,7 @@ const AddProductModal = ({ show, onHide, brands, types, suppliers, images }) => 
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post(`https://localhost:5001/api/Product/create`, {
+        axios.post(`https://i-bozh-server.herokuapp.com/api/Product/create`, {
             name: event.target.name.value,
             year: event.target.year.value,
             brandId: parseInt(event.target.brand.value),

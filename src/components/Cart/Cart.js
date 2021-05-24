@@ -35,7 +35,7 @@ class Cart extends Component {
     user() {
         const { match } = this.props;
         const { login } = match.params;
-        axios.get(`https://localhost:5001/api/Client/getByLogin/` + login)
+        axios.get(`https://i-bozh-server.herokuapp.com/api/Client/getByLogin/` + login)
             .then(res => this.setState({ user: res.data }))
     }
 
@@ -63,7 +63,7 @@ class Cart extends Component {
             const totalPrice = this.props.items.reduce((accumulator, product) => {
                 return accumulator + product.price * product.quantity;
             }, 0);
-            axios.post(`https://localhost:5001/api/Order/makeOrder/?${qs.stringify({
+            axios.post(`https://i-bozh-server.herokuapp.com/api/Order/makeOrder/?${qs.stringify({
                 ClientId: this.state.user.id,
                 TotalPrice: totalPrice
             })}`, arrOrder)
@@ -113,7 +113,7 @@ class Cart extends Component {
         });
 
 
-        axios.get(`https://localhost:5001/api/Order/getAll`)
+        axios.get(`https://i-bozh-server.herokuapp.com/api/Order/getAll`)
             .then(res => {
                 const order = res.data[res.data.length - 1];
                 this.sendFeedback(templateId, {
@@ -283,7 +283,7 @@ const Cart = ({ match }) => {
             const totalPrice = cartItems.reduce((accumulator, product) => {
                 return accumulator + product.price * product.quantity;
             }, 0);
-            axios.post(`https://localhost:5001/api/Order/makeOrder/?${qs.stringify({
+            axios.post(`https://i-bozh-server.herokuapp.com/api/Order/makeOrder/?${qs.stringify({
                 ClientId: user.id,
                 TotalPrice: totalPrice
             })}`, arrOrder)
@@ -335,7 +335,7 @@ const Cart = ({ match }) => {
         });
 
 
-        axios.get(`https://localhost:5001/api/Order/getAll`)
+        axios.get(`https://i-bozh-server.herokuapp.com/api/Order/getAll`)
             .then(res => {
                 const order = res.data[res.data.length - 1];
                 sendFeedback(templateId, {

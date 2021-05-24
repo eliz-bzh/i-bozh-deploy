@@ -17,7 +17,7 @@ const AddSupplierModal = ({ show, onHide }) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        axios.post(`https://localhost:5001/api/Supplier/create?${qs.stringify({
+        axios.post(`https://i-bozh-server.herokuapp.com/api/Supplier/create?${qs.stringify({
             NameOrganization: event.target.name.value,
             Number: event.target.number.value,
             Adress: event.target.adress.value

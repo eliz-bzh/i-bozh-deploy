@@ -26,7 +26,7 @@ const EditProductModal = ({ show, onHide, id, name, year, type, brand, modal, wa
                 imagesArray.push({ url: image.url })
             )
         }
-        axios.put(`https://localhost:5001/api/Product/edit`, {
+        axios.put(`https://i-bozh-server.herokuapp.com/api/Product/edit`, {
             id: id,
             name: event.target.name.value,
             year: event.target.year.value,

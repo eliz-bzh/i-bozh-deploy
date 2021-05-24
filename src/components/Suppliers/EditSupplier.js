@@ -17,7 +17,7 @@ const EditSupplierModal = ({ show, onHide, supplierid, supplierOrg, supplierNum,
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        axios.put(`https://localhost:5001/api/Supplier/edit?${qs.stringify({
+        axios.put(`https://i-bozh-server.herokuapp.com/api/Supplier/edit?${qs.stringify({
             Id: supplierid,
             NameOrganization: event.target.name.value,
             Number: event.target.number.value,

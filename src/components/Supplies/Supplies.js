@@ -29,7 +29,7 @@ const Supplies = () => {
 
     const deleteSupply = (id) => {
         if (window.confirm('Вы уверены?')) {
-            axios.delete(`https://localhost:5001/api/Supply/delete/${id}`)
+            axios.delete(`https://i-bozh-server.herokuapp.com/api/Supply/delete/${id}`)
                 .then(res => dispatch(fetchSupplies()))
                 .catch(error => console.log(error));
         }
