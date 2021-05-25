@@ -9,11 +9,12 @@ import axios from 'axios';
 import ScrollTop from '../ScrollTop';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBrands } from '../../redux/actions/ActionFetchData';
+import { Spinner } from '..';
 
 const Brands = () => {
 
     const dispatch = useDispatch();
-    const { brands } = useSelector(({ fetchDataReducer }) => fetchDataReducer);
+    const { brands, loading } = useSelector(({ fetchDataReducer }) => fetchDataReducer);
     const [addModalShow, setAddModalShow] = useState(false);
     const [editModalShow, setEditModalShow] = useState(false);
     const [Id, setId] = useState(null);
@@ -38,7 +39,7 @@ const Brands = () => {
 
     return (
         <div>
-            <ButtonToolbar className='float-right mt-2 mb-2'>
+            <ButtonToolbar className='d-flex justify-content-end mt-2 mb-2'>
                 <Button variant="light"
                     onClick={() => setAddModalShow(true)}>
                     {< AddIcon />} Добавить новый бренд
@@ -50,7 +51,7 @@ const Brands = () => {
                 onHide={addModalClose}>
             </AddBrandModal>
 
-            {(brands && brands.length !== 0) ? (
+            {(loading) ? ((brands && brands.length !== 0) ? (
                 <Table className='mt-4' responsive="xl">
                     <thead>
                         <tr>
@@ -93,7 +94,12 @@ const Brands = () => {
                         )}
                     </tbody>
                 </Table>
-            ) : (<Alert className='mt-2 d-flex justify-content-center' variant='secondary'>Список пуст</Alert>)}
+            ) : (<Alert className='mt-2 d-flex justify-content-center' variant='secondary'>Список пуст</Alert>))
+                : (
+                    <div className='mt-2 d-flex justify-content-center'>
+                        <Spinner />
+                    </div>
+                )}
             <ScrollTop />
         </div>
     )

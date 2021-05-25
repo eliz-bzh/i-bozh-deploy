@@ -10,7 +10,7 @@ import SnackBar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import ExportCSV from '../../ExcelCheck/Check';
 import ScrollTop from '../ScrollTop';
-import { Carousel, PaymentSystem } from '..';
+import { Carousel, PaymentSystem, Spinner } from '..';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 
@@ -22,7 +22,7 @@ init("user_ZNDi6J5mnaAE4KFSr9mch");
 const Cart = ({ match }) => {
 
     const dispatch = useDispatch();
-    const { user } = useSelector(({ fetchDataReducer }) => fetchDataReducer);
+    const { user, loading } = useSelector(({ fetchDataReducer }) => fetchDataReducer);
     const { cartItems } = useSelector(({ cartReducer }) => cartReducer);
     const [open, setOpen] = useState(false);
     const [message, setMessage] = useState('');
@@ -144,10 +144,12 @@ const Cart = ({ match }) => {
                     <b className='snackBar-label'>{message}</b>
                 </MuiAlert>
             </SnackBar>
-            <h1 className='mt-2 d-flex justify-content-left align-items-center'>
-                <Avatar className='mr-2' style={{ backgroundColor: '#FF7700' }}>{(`${user.name}`).split('')[0].toLocaleUpperCase()}</Avatar>
-                {user.name + ' ' + user.surname}
-            </h1>
+            {(loading) ? (
+                <h1 className='mt-2 d-flex justify-content-left align-items-center'>
+                    <Avatar className='mr-2' style={{ backgroundColor: '#FF7700' }}>{(`${user.name}`).split('')[0].toLocaleUpperCase()}</Avatar>
+                    {user.name + ' ' + user.surname}
+                </h1>
+            ) : (null)}
             <h1 className='mt-2 d-flex justify-content-center align-items-center'>Корзина</h1>
             <ButtonToolbar className='mb-2 float-right'>
                 <ButtonGroup>

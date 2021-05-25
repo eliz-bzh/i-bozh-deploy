@@ -9,7 +9,7 @@ import RadioBox from '../RadioBox';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import ViewComfyIcon from '@material-ui/icons/ViewComfy';
 import ScrollTop from '../ScrollTop';
-import { Carousel, ToggleButtons } from '..';
+import { Carousel, Spinner, ToggleButtons } from '..';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBaners, fetchBrands, fetchProducts, fetchSuppliers, fetchTypes } from '../../redux/actions/ActionFetchData';
 
@@ -22,7 +22,7 @@ const items = [
 const Products = ({ role }) => {
 
     const dispatch = useDispatch();
-    const { products, brands, types, baners, suppliers } = useSelector(({ fetchDataReducer }) => fetchDataReducer);
+    const { products, brands, types, baners, suppliers, loading } = useSelector(({ fetchDataReducer }) => fetchDataReducer);
     const [addModalShow, setAddModalShow] = useState(false);
     const [search, setSearch] = useState('');
     const [newFiltersBrands, setNewFiltersBrands] = useState([]);
@@ -87,10 +87,15 @@ const Products = ({ role }) => {
     }
 
     const productsSearch = searchPanel(filterList(sortList(products, sortBy)));
-    const list = (productsSearch && productsSearch.length !== 0) ? (
+    const list = (loading) ? ((productsSearch && productsSearch.length !== 0) ? (
         (grid === true) ? (<Row className='d-flex justify-content-center'>{productsSearch.map(product => <ProductOfGrid key={product.id} product={product} role={role} />)}</Row>)
             : (<ListGroup>{productsSearch.map(product => <ProductOfList key={product.id} product={product} role={role} />)}</ListGroup>))
-        : (<Alert className='mt-2 d-flex justify-content-center' variant='secondary'>Список пуст</Alert>)
+        : (<Alert className='mt-2 d-flex justify-content-center' variant='secondary'>Список пуст</Alert>))
+        : (
+            <div className='mt-2 d-flex justify-content-center'>
+                <Spinner />
+            </div>
+        )
 
     return (
         <div>

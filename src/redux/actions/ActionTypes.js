@@ -14,3 +14,4 @@ export const FETCH_CLIENTS = "FETCH_CLIENTS";
 export const FETCH_PRODUCTS = "FETCH_PRODUCTS";
 export const FETCH_BANERS = "FETCH_BANERS";
 export const FETCH_USER = "FETCH_USER";
+export const SET_LOADER = "SET_LOADER";

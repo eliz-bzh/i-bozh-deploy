@@ -9,11 +9,12 @@ import axios from 'axios';
 import ScrollTop from '../ScrollTop';
 import { fetchSuppliers } from '../../redux/actions/ActionFetchData';
 import { useDispatch, useSelector } from 'react-redux';
+import { Spinner } from '..';
 
 const Suppliers = () => {
 
     const dispatch = useDispatch();
-    const { suppliers } = useSelector(({ fetchDataReducer }) => fetchDataReducer);
+    const { suppliers, loading } = useSelector(({ fetchDataReducer }) => fetchDataReducer);
     const [addModalShow, setAddModalShow] = useState(false);
     const [editModalShow, setEditModalShow] = useState(false);
     const [Id, setId] = useState(null);
@@ -40,7 +41,7 @@ const Suppliers = () => {
 
     return (
         <div>
-            <ButtonToolbar className='float-right mt-2 mb-2'>
+            <ButtonToolbar className='d-flex justify-content-end mt-2 mb-2'>
                 <Button variant="light"
                     onClick={() => setAddModalShow(true)}>
                     {<AddIcon />}Добавить нового поставщика
@@ -52,7 +53,7 @@ const Suppliers = () => {
                 onHide={addModalClose}>
             </AddSupplierModal>
 
-            {(suppliers && suppliers.length !== 0) ? (
+            {(loading) ? ((suppliers && suppliers.length !== 0) ? (
                 <Table className='mt-4' responsive="xl">
                     <thead>
                         <tr>
@@ -104,7 +105,12 @@ const Suppliers = () => {
                         )}
                     </tbody>
                 </Table>
-            ) : (<Alert className='mt-2 d-flex justify-content-center' variant='secondary'>Список пуст</Alert>)}
+            ) : (<Alert className='mt-2 d-flex justify-content-center' variant='secondary'>Список пуст</Alert>))
+                : (
+                    <div className='mt-2 d-flex justify-content-center'>
+                        <Spinner />
+                    </div>
+                )}
             <ScrollTop />
         </div>
     )

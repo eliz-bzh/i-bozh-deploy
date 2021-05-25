@@ -7,11 +7,12 @@ import MuiAlert from '@material-ui/lab/Alert';
 import ScrollTop from '../ScrollTop';
 import { fetchClients, fetchOrders } from '../../redux/actions/ActionFetchData';
 import { useDispatch, useSelector } from 'react-redux';
+import { Spinner } from '..';
 
 const Order = () => {
 
     const dispatch = useDispatch();
-    const { orders, clients } = useSelector(({ fetchDataReducer }) => fetchDataReducer);
+    const { orders, clients, loading } = useSelector(({ fetchDataReducer }) => fetchDataReducer);
     const [open, setOpen] = useState(false);
     const [message, setMessage] = useState('');
     const [severity, setSeverity] = useState('');
@@ -92,7 +93,7 @@ const Order = () => {
                 </Row>
             </Form>
 
-            {(filterOrder && filterOrder.length !== 0) ? (
+            {(loading) ? ((filterOrder && filterOrder.length !== 0) ? (
                 <Table className='mt-4' responsive="xl">
                     <thead>
                         <tr>
@@ -113,65 +114,15 @@ const Order = () => {
                         )}
                     </tbody>
                 </Table>
-            ) : (<Alert className='mt-2 d-flex justify-content-center' variant='secondary'>Список пуст</Alert>)}
+            ) : (<Alert className='mt-2 d-flex justify-content-center' variant='secondary'>Список пуст</Alert>))
+                : (
+                    <div className='mt-2 d-flex justify-content-center'>
+                        <Spinner />
+                    </div>
+                )}
             <ScrollTop />
         </div>
     )
 }
 
 export default Order;
-
-/*export default class Order extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            orders: [], clients: [], open: false, message: '', severity: '', to: '', from: ''
-        }
-    }
-
-    componentDidMount() {
-        this.ordersList();
-        this.clientList();
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (prevState.to !== this.state.to || prevState.from !== this.state.from) {
-            this.ordersList();
-        }
-    }
-
-    ordersList() {
-        axios.get(`https://i-bozh-server.herokuapp.com/api/Order/getAll`)
-            .then(res => this.setState({ orders: res.data }));
-    }
-
-    clientList() {
-        axios.get(`https://i-bozh-server.herokuapp.com/api/Client/getAll`)
-            .then(res => this.setState({ clients: res.data }));
-    }
-
-
-
-
-
-    filterList(rows) {
-        const { to, from } = this.state;
-        let newList = rows;
-        if (from !== '') {
-            newList = rows.filter(row => row.date >= from);
-        }
-        if (to !== '') {
-            newList = newList.filter(row => row.date < to);
-        }
-        return newList;
-    }
-
-    render() {
-        const { orders, clients, message, open, severity } = this.state;
-        const filterOrder = this.filterList(orders);
-        return (
-
-        )
-    }
-}*/
