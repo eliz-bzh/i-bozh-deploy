@@ -7,9 +7,11 @@ export const setLoad = loader => ({
 });
 
 export const fetchBrands = () => (dispatch) => {
-    dispatch(setLoad(false));
     axios.get(`https://i-bozh-server.herokuapp.com/api/Brand/getAll`)
-        .then(({ data }) => dispatch(setBrands(data)))
+        .then(({ data }) => {
+            dispatch(setBrands(data));
+            dispatch(setLoad(false));
+        })
 }
 
 export const setBrands = brands => ({
@@ -18,9 +20,11 @@ export const setBrands = brands => ({
 });
 
 export const fetchTypes = () => (dispatch) => {
-    dispatch(setLoad(false));
     axios.get(`https://i-bozh-server.herokuapp.com/api/Type/getAll`)
-        .then(({ data }) => dispatch(setTypes(data)))
+        .then(({ data }) => {
+            dispatch(setTypes(data));
+            dispatch(setLoad(false));
+        })
 }
 
 export const setTypes = types => ({
@@ -29,9 +33,11 @@ export const setTypes = types => ({
 });
 
 export const fetchSuppliers = () => (dispatch) => {
-    dispatch(setLoad(false));
     axios.get(`https://i-bozh-server.herokuapp.com/api/Supplier/getAll`)
-        .then(({ data }) => dispatch(setSuppliers(data)))
+        .then(({ data }) => {
+            dispatch(setSuppliers(data));
+            dispatch(setLoad(false));
+        })
 }
 
 export const setSuppliers = suppliers => ({
@@ -40,9 +46,11 @@ export const setSuppliers = suppliers => ({
 });
 
 export const fetchSupplies = () => (dispatch) => {
-    dispatch(setLoad(false));
     axios.get(`https://i-bozh-server.herokuapp.com/api/Supply/getAll`)
-        .then(({ data }) => dispatch(setSupplies(data)))
+        .then(({ data }) => {
+            dispatch(setSupplies(data));
+            dispatch(setLoad(false));
+        })
 }
 
 export const setSupplies = supplies => ({
@@ -51,9 +59,11 @@ export const setSupplies = supplies => ({
 });
 
 export const fetchOrders = () => (dispatch) => {
-    dispatch(setLoad(false));
     axios.get(`https://i-bozh-server.herokuapp.com/api/Order/getAll`)
-        .then(({ data }) => dispatch(setOrders(data)))
+        .then(({ data }) => {
+            dispatch(setOrders(data));
+            dispatch(setLoad(false));
+        })
 }
 
 export const setOrders = orders => ({
@@ -62,9 +72,11 @@ export const setOrders = orders => ({
 });
 
 export const fetchClients = () => (dispatch) => {
-    dispatch(setLoad(false));
     axios.get(`https://i-bozh-server.herokuapp.com/api/Client/getAll`)
-        .then(({ data }) => dispatch(setClients(data)))
+        .then(({ data }) => {
+            dispatch(setClients(data));
+            dispatch(setLoad(false));
+        })
 }
 
 export const setClients = clients => ({
@@ -73,9 +85,11 @@ export const setClients = clients => ({
 });
 
 export const fetchProducts = () => (dispatch) => {
-    dispatch(setLoad(false));
     axios.get(`https://i-bozh-server.herokuapp.com/api/Product/getAll`)
-        .then(({ data }) => dispatch(setProducts(data)))
+        .then(({ data }) => {
+            dispatch(setProducts(data));
+            dispatch(setLoad(false));
+        })
 }
 
 export const setProducts = products => ({
@@ -84,9 +98,11 @@ export const setProducts = products => ({
 });
 
 export const fetchBaners = () => (dispatch) => {
-    dispatch(setLoad(false));
     axios.get(`https://i-bozh-server.herokuapp.com/api/Product/baners`)
-        .then(({ data }) => dispatch(setBaners(data)))
+        .then(({ data }) => {
+            dispatch(setBaners(data));
+            dispatch(setLoad(false));
+        })
 }
 
 export const setBaners = baners => ({
@@ -95,9 +111,11 @@ export const setBaners = baners => ({
 });
 
 export const fetchUser = (login) => (dispatch) => {
-    dispatch(setLoad(false));
     axios.get(`https://i-bozh-server.herokuapp.com/api/Client/getByLogin/` + login)
-        .then(({ data }) => dispatch(setUser(data)))
+        .then(({ data }) => {
+            dispatch(setUser(data));
+            dispatch(setLoad(false));
+        })
 }
 
 export const setUser = user => ({

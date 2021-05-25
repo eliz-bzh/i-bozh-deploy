@@ -16,7 +16,7 @@ import { withRouter } from "react-router-dom";
 
 import emailjs from "emailjs-com";
 import { init } from "emailjs-com";
-import { fetchUser } from '../../redux/actions/ActionFetchData';
+import { fetchUser, setLoad } from '../../redux/actions/ActionFetchData';
 init("user_ZNDi6J5mnaAE4KFSr9mch");
 
 const Cart = ({ match }) => {
@@ -34,6 +34,7 @@ const Cart = ({ match }) => {
 
     useEffect(() => {
         if (user.login !== match.params.login || user === {}) {
+            dispatch(setLoad(true));
             dispatch(fetchUser(match.params.login));
         }
     }, [])
@@ -144,7 +145,7 @@ const Cart = ({ match }) => {
                     <b className='snackBar-label'>{message}</b>
                 </MuiAlert>
             </SnackBar>
-            {(loading) ? (
+            {(!loading) ? (
                 <h1 className='mt-2 d-flex justify-content-left align-items-center'>
                     <Avatar className='mr-2' style={{ backgroundColor: '#FF7700' }}>{(`${user.name}`).split('')[0].toLocaleUpperCase()}</Avatar>
                     {user.name + ' ' + user.surname}

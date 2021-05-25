@@ -5,7 +5,7 @@ import { Button, Table, Alert, Form, Row, Col, InputGroup } from 'react-bootstra
 import SnackBar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import ScrollTop from '../ScrollTop';
-import { fetchClients, fetchOrders } from '../../redux/actions/ActionFetchData';
+import { fetchClients, fetchOrders, setLoad } from '../../redux/actions/ActionFetchData';
 import { useDispatch, useSelector } from 'react-redux';
 import { Spinner } from '..';
 
@@ -55,6 +55,7 @@ const Order = () => {
 
     useEffect(() => {
         if (orders.length === 0) {
+            dispatch(setLoad(true));
             dispatch(fetchOrders());
         } if (clients.length === 0) {
             dispatch(fetchClients());
@@ -93,7 +94,7 @@ const Order = () => {
                 </Row>
             </Form>
 
-            {(loading) ? ((filterOrder && filterOrder.length !== 0) ? (
+            {(!loading) ? ((filterOrder && filterOrder.length !== 0) ? (
                 <Table className='mt-4' responsive="xl">
                     <thead>
                         <tr>

@@ -8,7 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios';
 import ScrollTop from '../ScrollTop';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchBrands } from '../../redux/actions/ActionFetchData';
+import { fetchBrands, setLoad } from '../../redux/actions/ActionFetchData';
 import { Spinner } from '..';
 
 const Brands = () => {
@@ -33,6 +33,7 @@ const Brands = () => {
 
     useEffect(() => {
         if (brands.length === 0) {
+            dispatch(setLoad(true));
             dispatch(fetchBrands());
         }
     }, [])
@@ -51,7 +52,7 @@ const Brands = () => {
                 onHide={addModalClose}>
             </AddBrandModal>
 
-            {(loading) ? ((brands && brands.length !== 0) ? (
+            {(!loading) ? ((brands && brands.length !== 0) ? (
                 <Table className='mt-4' responsive="xl">
                     <thead>
                         <tr>

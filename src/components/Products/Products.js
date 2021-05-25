@@ -11,7 +11,7 @@ import ViewComfyIcon from '@material-ui/icons/ViewComfy';
 import ScrollTop from '../ScrollTop';
 import { Carousel, Spinner, ToggleButtons } from '..';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchBaners, fetchBrands, fetchProducts, fetchSuppliers, fetchTypes } from '../../redux/actions/ActionFetchData';
+import { fetchBaners, fetchBrands, fetchProducts, fetchSuppliers, fetchTypes, setLoad } from '../../redux/actions/ActionFetchData';
 
 const items = [
     { id: 1, label: 'Любой' },
@@ -34,14 +34,19 @@ const Products = ({ role }) => {
 
     useEffect(() => {
         if (products.length === 0) {
+            dispatch(setLoad(true));
             dispatch(fetchProducts());
         } if (brands.length === 0) {
+            dispatch(setLoad(true));
             dispatch(fetchBrands());
         } if (types.length === 0) {
+            dispatch(setLoad(true));
             dispatch(fetchTypes());
         } if (baners.length === 0) {
+            dispatch(setLoad(true));
             dispatch(fetchBaners());
         } if (suppliers.length === 0) {
+            dispatch(setLoad(true));
             dispatch(fetchSuppliers());
         }
     }, [])
@@ -87,7 +92,7 @@ const Products = ({ role }) => {
     }
 
     const productsSearch = searchPanel(filterList(sortList(products, sortBy)));
-    const list = (loading) ? ((productsSearch && productsSearch.length !== 0) ? (
+    const list = (!loading) ? ((productsSearch && productsSearch.length !== 0) ? (
         (grid === true) ? (<Row className='d-flex justify-content-center'>{productsSearch.map(product => <ProductOfGrid key={product.id} product={product} role={role} />)}</Row>)
             : (<ListGroup>{productsSearch.map(product => <ProductOfList key={product.id} product={product} role={role} />)}</ListGroup>))
         : (<Alert className='mt-2 d-flex justify-content-center' variant='secondary'>Список пуст</Alert>))

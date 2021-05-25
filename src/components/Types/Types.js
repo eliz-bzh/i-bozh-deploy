@@ -7,7 +7,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios';
 import ScrollTop from '../ScrollTop';
-import { fetchTypes } from '../../redux/actions/ActionFetchData';
+import { fetchTypes, setLoad } from '../../redux/actions/ActionFetchData';
 import { useDispatch, useSelector } from 'react-redux';
 import { Spinner } from '..';
 
@@ -33,6 +33,7 @@ const Types = () => {
 
     useEffect(() => {
         if (types.length === 0) {
+            dispatch(setLoad(true));
             dispatch(fetchTypes());
         }
     }, [])
@@ -50,7 +51,7 @@ const Types = () => {
                 show={addModalShow}
                 onHide={addModalClose}>
             </AddTypeModal>
-            {(loading) ? ((types && types.length !== 0) ? (
+            {(!loading) ? ((types && types.length !== 0) ? (
                 <Table className='mt-4' responsive="xl">
                     <thead>
                         <tr>

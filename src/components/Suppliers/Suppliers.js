@@ -7,7 +7,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios';
 import ScrollTop from '../ScrollTop';
-import { fetchSuppliers } from '../../redux/actions/ActionFetchData';
+import { fetchSuppliers, setLoad } from '../../redux/actions/ActionFetchData';
 import { useDispatch, useSelector } from 'react-redux';
 import { Spinner } from '..';
 
@@ -35,6 +35,7 @@ const Suppliers = () => {
 
     useEffect(() => {
         if (suppliers.length === 0) {
+            dispatch(setLoad(true));
             dispatch(fetchSuppliers());
         }
     }, [])
@@ -53,7 +54,7 @@ const Suppliers = () => {
                 onHide={addModalClose}>
             </AddSupplierModal>
 
-            {(loading) ? ((suppliers && suppliers.length !== 0) ? (
+            {(!loading) ? ((suppliers && suppliers.length !== 0) ? (
                 <Table className='mt-4' responsive="xl">
                     <thead>
                         <tr>

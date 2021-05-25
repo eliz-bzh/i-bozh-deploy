@@ -16,23 +16,23 @@ const initialState = {
 const ReducerFetchData = (state = initialState, action) => {
     switch (action.type) {
         case CONSTANTS.FETCH_BRANDS:
-            return { ...state, brands: action.payload, loading: true };
+            return { ...state, brands: action.payload };
         case CONSTANTS.FETCH_TYPES:
-            return { ...state, types: action.payload, loading: true };
+            return { ...state, types: action.payload };
         case CONSTANTS.FETCH_SUPPLIERS:
-            return { ...state, suppliers: action.payload, loading: true };
+            return { ...state, suppliers: action.payload };
         case CONSTANTS.FETCH_SUPPLIES:
-            return { ...state, supplies: action.payload, loading: true };
+            return { ...state, supplies: action.payload };
         case CONSTANTS.FETCH_ORDERS:
-            return { ...state, orders: action.payload, loading: true };
+            return { ...state, orders: action.payload };
         case CONSTANTS.FETCH_CLIENTS:
-            return { ...state, clients: action.payload, loading: true };
+            return { ...state, clients: action.payload };
         case CONSTANTS.FETCH_PRODUCTS:
-            return { ...state, products: action.payload, loading: true };
+            return { ...state, products: action.payload };
         case CONSTANTS.FETCH_BANERS:
-            return { ...state, baners: action.payload, loading: true };
+            return { ...state, baners: action.payload };
         case CONSTANTS.FETCH_USER:
-            return { ...state, user: action.payload, loading: true };
+            return { ...state, user: action.payload };
         case (CONSTANTS.SET_LOADER): {
             return { ...state, loading: action.payload };
         }
