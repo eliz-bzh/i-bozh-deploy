@@ -16,10 +16,10 @@ import { withRouter } from "react-router-dom";
 
 import emailjs from "emailjs-com";
 import { init } from "emailjs-com";
-import { fetchClients } from '../../redux/actions/ActionFetchData';
+import { fetchUser } from '../../redux/actions/ActionFetchData';
 init("user_ZNDi6J5mnaAE4KFSr9mch");
 
-class Cart extends Component {
+/*class Cart extends Component {
 
     constructor(props) {
         super(props);
@@ -228,14 +228,13 @@ const mapStateToProps = state => {
     return { items: state.cartReducer.cartItems };
 };
 
-export default withRouter(connect(mapStateToProps)(Cart));
+export default withRouter(connect(mapStateToProps)(Cart));*/
 
-/*
 
 const Cart = ({ match }) => {
 
     const dispatch = useDispatch();
-    const { clients } = useSelector(({ fetchDataReducer }) => fetchDataReducer);
+    const { user } = useSelector(({ fetchDataReducer }) => fetchDataReducer);
     const { cartItems } = useSelector(({ cartReducer }) => cartReducer);
     const [open, setOpen] = useState(false);
     const [message, setMessage] = useState('');
@@ -246,16 +245,10 @@ const Cart = ({ match }) => {
     const [dataToCheck, setDataToCheck] = useState([]);
 
     useEffect(() => {
-        if (clients.length === 0) {
-            dispatch(fetchClients());
+        if (user.login !== match.params.login || user === {}) {
+            dispatch(fetchUser(match.params.login));
         }
     }, [])
-
-    const user = () => {
-        const userd = clients.find(client => client.login === match.params.login);
-        console.log(userd);
-        return userd;
-    }
 
     const data = () => {
         const data = [];
@@ -447,5 +440,3 @@ const Cart = ({ match }) => {
 }
 
 export default Cart;
-
-*/

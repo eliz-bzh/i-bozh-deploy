@@ -8,7 +8,8 @@ const initialState = {
     orders: [],
     clients: [],
     products: [],
-    baners: []
+    baners: [],
+    user: {}
 }
 
 const ReducerFetchData = (state = initialState, action) => {
@@ -29,6 +30,8 @@ const ReducerFetchData = (state = initialState, action) => {
             return { ...state, products: action.payload };
         case CONSTANTS.FETCH_BANERS:
             return { ...state, baners: action.payload };
+        case CONSTANTS.FETCH_USER:
+            return { ...state, user: action.payload };
         default:
             return state;
     }

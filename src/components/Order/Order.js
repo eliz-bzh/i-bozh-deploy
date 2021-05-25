@@ -60,8 +60,6 @@ const Order = () => {
         }
     }, [])
 
-    console.log(clients)
-
     const filterOrder = filterList(orders);
 
     return (
