@@ -60,8 +60,8 @@ const ProductOfGrid = ({ product, role }) => {
                                     Бренд: {brands.filter(brand => brand.id === product.brandId).map(brand => { return brand.name })}<br />
                                     Модель: {product.modal}<br />
                                     Год выпуска: {product.year}<br />
-                                    Срок гарантии: {product.warranty}<br />
-                                    Количество на складе: {product.amount}<br />
+                                    Срок гарантии: {product.warranty} год<br />
+                                    Количество на складе: {product.amount} шт.<br />
                                     Поставщик: {suppliers.filter(supplier => supplier.id === product.supplyId).map(supplier => { return supplier.nameOrganization + ', ' + supplier.adress + '; ' + supplier.number })}<br />
                                 <span className='d-flex justify-content-end'><b className='price product'>{product.price} </b>BYN</span>
                             </Card.Text>

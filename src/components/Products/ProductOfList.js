@@ -65,8 +65,8 @@ const ProductOfList = ({ product, role }) => {
                                         Год выпуска: {product.year}<br />
                                 </Col>
                                 <Col>
-                                    Срок гарантии: {product.warranty}<br />
-                                        Количество на складе: {product.amount}<br />
+                                    Срок гарантии: {product.warranty} год<br />
+                                        Количество на складе: {product.amount} шт.<br />
                                         Поставщик: {suppliers.filter(supplier => supplier.id === product.supplyId).map(supplier => { return supplier.nameOrganization + ', ' + supplier.adress + '; ' + supplier.number })}<br />
                                     <div className='d-flex justify-content-end'><b className='price product'>{product.price}</b>BYN</div>
                                 </Col>
