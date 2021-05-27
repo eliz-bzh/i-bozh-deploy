@@ -8,7 +8,7 @@ export default class RegistrationForm extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { error: '', redirect: false }
+        this.state = { error: '', redirect: false, loading: false }
     }
 
     hashingPassword = (password) => {
@@ -17,9 +17,10 @@ export default class RegistrationForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+        this.setState({ loading: true });
         if (event.target.password.value === event.target.password2.value) {
 
-            axios.post(`https://i-bozh-server.herokuapp.com/api/Client/create`, {
+            axios.post(`https://localhost:5001/api/Client/create`, {
 
                 name: event.target.name.value,
                 surname: event.target.surname.value,
@@ -30,15 +31,15 @@ export default class RegistrationForm extends Component {
                 password: this.hashingPassword(event.target.password.value)
 
             })
-                .then(res => this.setState({ error: '', redirect: true }))
-                .catch(error => this.setState({ error: 'Пользователь уже существует' }));
+                .then(res => this.setState({ error: '', redirect: true, loading: false }))
+                .catch(error => this.setState({ error: 'Пользователь уже существует', loading: false }));
         } else {
-            this.setState({ error: 'Пароли не совпадают' });
+            this.setState({ error: 'Пароли не совпадают', loading: false });
         }
     }
 
     render() {
-        const { redirect } = this.state;
+        const { redirect, loading } = this.state;
         return (
             <div>
                 {redirect ? <Redirect to={`/`} /> : null}
@@ -97,7 +98,7 @@ export default class RegistrationForm extends Component {
                                 {(this.state.error !== '') ? (<Alert className='d-flex justify-content-center' variant='danger'>{this.state.error}</Alert>) : ''}
                                 <br />
                                 <ButtonGroup className='d-flex justify-content-center align-items-center' variant='horizontal'>
-                                    <Button className='active' variant='outline-dark' size="lg" type="submit">Зарегистрироваться</Button>
+                                    <Button className='active' variant='outline-dark' size="lg" type="submit">{loading ? 'Ожидание...' : 'Зарегистрироваться'}</Button>
                                     <Button variant='outline-dark' size="lg" onClick={() => { this.setState({ redirect: true }) }}>
                                         Отмена</Button>
                                 </ButtonGroup>
