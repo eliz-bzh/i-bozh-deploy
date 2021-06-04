@@ -30,7 +30,6 @@ const Cart = ({ match }) => {
     const [buttonHiddenCheck, setButtonHiddenCheck] = useState(true);
     const [buttonHiddenPayment, setButtonHiddenPayment] = useState(true);
     const fileName = 'CheckOnline';
-    const [dataToCheck, setDataToCheck] = useState([]);
 
     useEffect(() => {
         if (user.login !== match.params.login || user === {}) {
@@ -38,19 +37,6 @@ const Cart = ({ match }) => {
             dispatch(fetchUser(match.params.login));
         }
     }, [])
-
-    const data = () => {
-        const data = [];
-        cartItems.map(item => {
-            let newItem = { Название: item.name, 'Цена за единицу': item.price + ' руб.', Количество: item.quantity };
-            data.push(newItem);
-        });
-        const total = cartItems.reduce((accumulator, product) => {
-            return accumulator + product.price * product.quantity;
-        }, 0);
-        data.push({ Итого: total + ' руб.' });
-        setDataToCheck(data);
-    }
 
     const requestOrder = () => {
         if (cartItems && cartItems.length === 0) {
@@ -70,7 +56,6 @@ const Cart = ({ match }) => {
                 TotalPrice: totalPrice
             })}`, arrOrder)
                 .then(res => {
-                    data();
                     setOpen(true);
                     setMessage('Заказ оформлен');
                     setSeverity('success');
@@ -116,7 +101,6 @@ const Cart = ({ match }) => {
             products.push(` ${index + 1}) ${product.name} x ${product.quantity} шт.`)
         });
 
-
         axios.get(`https://i-bozh-server.herokuapp.com/api/Order/getAll`)
             .then(res => {
                 const order = res.data[res.data.length - 1];
@@ -154,7 +138,7 @@ const Cart = ({ match }) => {
             <h1 className='mt-2 d-flex justify-content-center align-items-center'>Корзина</h1>
             <ButtonToolbar className='mb-2 float-right'>
                 <ButtonGroup>
-                    <ExportCSV hidden={buttonHiddenCheck} csvData={dataToCheck} fileName={fileName} buttonHidden={hidden => setTimeout((hidden) => setButtonHiddenCheck(hidden), 10000, hidden)} />
+                    <ExportCSV hidden={buttonHiddenCheck} fileName={fileName} buttonHidden={hidden => setTimeout((hidden) => setButtonHiddenCheck(hidden), 10000, hidden)} />
                 </ButtonGroup>
                 <ButtonGroup>
                     <PaymentSystem totalPrice={cartItems.reduce((accumulator, product) => {

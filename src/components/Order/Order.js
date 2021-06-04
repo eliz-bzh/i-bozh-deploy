@@ -26,20 +26,27 @@ const Order = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.get(`https://i-bozh-server.herokuapp.com/api/Order/excelOrders?${qs.stringify({
-            From: event.target.from.value,
-            To: event.target.to.value
-        })}`)
-            .then(res => {
-                setOpen(true);
-                setMessage(`Файл находится ${res.data}`);
-                setSeverity('success');
+        axios({
+            url: `https://i-bozh-server.herokuapp.com/api/Order/excelOrders?${qs.stringify({
+                From: event.target.from.value,
+                To: event.target.to.value
+            })}`,
+            method: 'GET',
+            responseType: 'blob', // important
+        })
+            .then((response) => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'Report.xlsx');
+                document.body.appendChild(link);
+                link.click();
             })
             .catch(err => {
                 setOpen(true);
                 setMessage('Ошибка');
                 setSeverity('warning');
-            })
+            });
     }
 
     const filterList = (rows) => {
